@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ElementsContainer, ResultContainer } from "./components";
+import { Switcher } from "./components/UI";
+import styles from "./App.module.scss";
 
-function App() {
+const App = (): JSX.Element => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        <div className={styles.container__switcher}>
+          <Switcher position="constructor" handleChange={() => {}} />
+        </div>
+        <div className={styles.container__calculations}>
+          <ElementsContainer />
+          <ResultContainer />
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;

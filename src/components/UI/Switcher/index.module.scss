@@ -1,0 +1,41 @@
+@import '../../../styles/variables.module.scss';
+
+.switcher {
+    border-radius: 6px;
+    box-sizing: border-box;
+    border: none;
+    background-color: $grey-light;
+    padding: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+    &__button {
+        margin: 0;
+        box-sizing: border-box;
+        border: 1px solid $grey-light;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px 12px;
+        cursor: pointer;
+        border-radius: 6px;
+        background-color: inherit;
+        &_active {
+            border: 1px solid $grey;
+            background-color: $white;
+        }
+    }
+    &__img {
+        margin-right: 8px;
+        color: $grey-text;
+        &_active {
+            color: $blue;
+        }
+    }
+    &__text {
+        color: $grey-text;
+        font-size: 14px;
+        line-height: 15px;
+    }
+}

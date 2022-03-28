@@ -1,0 +1,15 @@
+@import '../../../styles/variables.module.scss';
+
+.container {
+    padding: 4px;
+    box-shadow: $shadow-color;
+    display: flex;
+    justify-content: space-between;
+    width: 240px;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    gap: 8px;
+    &_right {
+        box-shadow: none;
+    }
+}
