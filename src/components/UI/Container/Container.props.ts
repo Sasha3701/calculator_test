@@ -7,4 +7,5 @@ export interface ContainerProps
   children: ReactNode;
   inside: insideTypes;
   right?: boolean;
+  runtime?: boolean;
 }
