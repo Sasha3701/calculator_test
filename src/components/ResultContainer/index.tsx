@@ -1,36 +1,31 @@
-import { Button, Container, Display } from '../UI';
-import styles from './index.module.scss';
+import styles from "./index.module.scss";
+import { RootState } from "../../store/store";
+import { useSelector } from "react-redux";
+import { IElements } from "../../interfaces";
+import Display from "../Display";
+import Operations from "../Operations";
+import Numbers from "../Numbers";
+import Equals from "../Equals";
+import { activeBlockTypes } from "../../types";
+import ZoneEmpty from "../EmptyZone";
+
+const elements: IElements = {
+  display: <Display right={true} />,
+  actions: <Operations right={true} />,
+  numbers: <Numbers right={true} />,
+  action: <Equals right={true} />,
+};
 
 const ResultContainer = (): JSX.Element => {
-  return (
+  const blocks = useSelector((state: RootState) => state.calc.activeBlock);
+
+  return blocks.length ? (
     <div className={styles.result}>
-        <Container inside='display' right={true}>
-            <Display value={100}/>
-        </Container>
-        <Container inside='actions'right={true}>
-            <Button size='small' variant='white'>/</Button>
-            <Button size='small' variant='white'>x</Button>
-            <Button size='small' variant='white'>-</Button>
-            <Button size='small' variant='white'>+</Button>
-        </Container>
-        <Container inside='number' right={true}>
-            <Button size='medium' variant='white'>7</Button>
-            <Button size='medium' variant='white'>8</Button>
-            <Button size='medium' variant='white'>9</Button>
-            <Button size='medium' variant='white'>4</Button>
-            <Button size='medium' variant='white'>5</Button>
-            <Button size='medium' variant='white'>6</Button>
-            <Button size='medium' variant='white'>1</Button>
-            <Button size='medium' variant='white'>2</Button>
-            <Button size='medium' variant='white'>3</Button>
-            <Button size='large' variant='white'>0</Button>
-            <Button size='medium' variant='white'>,</Button>
-        </Container>
-        <Container inside='action' right={true}>
-            <Button size='large' variant='blue'>=</Button>
-        </Container>
+      {blocks.map((item: activeBlockTypes) => elements[item])}
     </div>
-  );
+  ) : (
+    <ZoneEmpty />
+  )
 };
 
 export default ResultContainer;

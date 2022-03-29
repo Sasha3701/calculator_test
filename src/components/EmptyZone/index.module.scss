@@ -1,0 +1,28 @@
+@import '../../styles/variables.module.scss';
+
+.zone {
+    box-sizing: border-box;
+    border-radius: 6px;
+    border: 2px dashed $grey;
+    width: 243px;
+    height: 480px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    &__title {
+        font-size: 14px;
+        font-weight: 500;
+        color: $blue;
+        line-height: 17px;
+        margin-top: 12px;
+        margin-bottom: 4px;
+    }
+    &__description {
+        width: 106px;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        color: $grey-medium;
+    }
+}

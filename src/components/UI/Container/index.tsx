@@ -8,6 +8,7 @@ const Container = ({
   inside,
   right = false,
   runtime = false,
+  useble = false,
   ...props
 }: ContainerProps): JSX.Element => {
   const handleDragStart = (e: DragEvent<HTMLDivElement>, inside: string) => {};
@@ -28,6 +29,7 @@ const Container = ({
     <div
       className={classNames(styles.container, {
         [styles.container_right]: right,
+        [styles.container_useble]: useble,
       })}
       onDragStart={(e) => handleDragStart(e, inside)}
       onDragLeave={handleDragLeave}

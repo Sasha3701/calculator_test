@@ -1,0 +1,1 @@
+export type activeBlockTypes = "display" | "actions" | "numbers" | "action";
