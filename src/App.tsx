@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { ElementsContainer, ResultContainer } from "./components";
 import { Switcher } from "./components/UI";
 import styles from "./App.module.scss";
@@ -9,9 +10,9 @@ const App = (): JSX.Element => {
   const mode = useSelector((state: RootState) => state.calc.mode);
   const dispatch = useDispatch();
 
-  const handleChangeMode = () => {
+  const handleChangeMode = useCallback(() => {
     dispatch(changeMode());
-  };
+  }, []);
 
   return (
     <div className={styles.wrapper}>

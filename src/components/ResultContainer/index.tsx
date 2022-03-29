@@ -1,4 +1,4 @@
-import { DragEvent, ChangeEvent } from "react";
+import { DragEvent, ChangeEvent, useCallback } from "react";
 import styles from "./index.module.scss";
 import { RootState } from "../../store/store";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,6 +10,7 @@ import Equals from "../Equals";
 import { activeBlockTypes } from "../../types";
 import ZoneEmpty from "../EmptyZone";
 import { addBlock } from "../../store/calcSlice";
+import { COLORS } from "../../const";
 
 const elements: IElements = {
   display: (key) => <Display key={key} right={true} />,
@@ -22,25 +23,25 @@ const ResultContainer = (): JSX.Element => {
   const { activeBlock, mode, current, pos } = useSelector((state: RootState) => state.calc);
   const dispatch = useDispatch();
 
-  const handleDragEnd = (e: DragEvent<HTMLDivElement>) => {
+  const handleDragEnd = useCallback((e: DragEvent<HTMLDivElement>) => {
     const event = e as unknown as ChangeEvent<HTMLDivElement>;
     if(!activeBlock.length) {
-      event.target.style.backgroundColor = "#FFFFFF";
+      event.target.style.backgroundColor = COLORS.WHITE;
     }
-  };
+  }, [activeBlock.length]);
 
-  const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
+  const handleDragOver = useCallback((e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const event = e as unknown as ChangeEvent<HTMLDivElement>;
     if(!activeBlock.length) {
-      event.target.style.backgroundColor = "#F0F9FF";
+      event.target.style.backgroundColor = COLORS.BLUE;
     }
-  };
+  }, [activeBlock.length]);
 
-  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+  const handleDrop = useCallback((e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     dispatch(addBlock({ block: current!, position: pos }))
-  };
+  }, [current, pos]);
 
   return (
     <div

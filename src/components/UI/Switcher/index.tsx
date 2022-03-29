@@ -1,3 +1,4 @@
+import { memo } from "react";
 import styles from "./index.module.scss";
 import { SwitcherProps, IButton } from "./Switcher.props";
 import { RuntimeIcon, SelectorIcon } from "../../../images";
@@ -9,7 +10,7 @@ const buttons: IButton[] = [
     text: "Runtime",
     renderImg: (active: boolean) => (
       <RuntimeIcon
-        className={classNames(styles["switcher__img"], {
+        className={classNames(styles.switcher__img, {
           [styles["switcher__img_active"]]: active,
         })}
       />
@@ -21,7 +22,7 @@ const buttons: IButton[] = [
     text: "Constructor",
     renderImg: (active: boolean) => (
       <SelectorIcon
-        className={classNames(styles["switcher__img"], {
+        className={classNames(styles.switcher__img, {
           [styles["switcher__img_active"]]: active,
         })}
       />
@@ -30,27 +31,25 @@ const buttons: IButton[] = [
   },
 ];
 
-const Switcher = ({
-  position,
-  handleChange,
-  ...props
-}: SwitcherProps): JSX.Element => {
-  return (
-    <div className={styles.switcher} {...props}>
-      {buttons.map(({ id, text, renderImg, variant }) => (
-        <button
-          key={id}
-          onClick={handleChange}
-          className={classNames(styles["switcher__button"], {
-            [styles["switcher__button_active"]]: position === variant,
-          })}
-        >
-          {renderImg(position === variant)}
-          <span className={styles["switcher__text"]}>{text}</span>
-        </button>
-      ))}
-    </div>
-  );
-};
+const Switcher = memo(
+  ({ position, handleChange, ...props }: SwitcherProps): JSX.Element => {
+    return (
+      <div className={styles.switcher} {...props}>
+        {buttons.map(({ id, text, renderImg, variant }) => (
+          <button
+            key={id}
+            onClick={handleChange}
+            className={classNames(styles.switcher__button, {
+              [styles["switcher__button_active"]]: position === variant,
+            })}
+          >
+            {renderImg(position === variant)}
+            <span className={styles.switcher__text}>{text}</span>
+          </button>
+        ))}
+      </div>
+    );
+  }
+);
 
 export default Switcher;

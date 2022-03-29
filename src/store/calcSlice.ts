@@ -41,13 +41,13 @@ export const calcSlice = createSlice({
       const cloneActiveBlock = [...state.activeBlock].filter(
         (item: activeBlockTypes) => item !== block
       );
-      if (index) {
+      if (index === -1) {
         cloneActiveBlock.push(block);
         state.activeBlock = cloneActiveBlock;
         state.current = null;
         return;
       }
-      cloneActiveBlock.splice(index + 1, 0, block);
+      cloneActiveBlock.splice(block === 'display' ? 0 : index + 1, 0, block);
       state.activeBlock = cloneActiveBlock;
       state.current = null;
     },

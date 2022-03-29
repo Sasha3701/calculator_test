@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Button, Container } from "../UI";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
@@ -18,7 +19,7 @@ const numbers: string[] = [
   ",",
 ];
 
-const Numbers = ({ right }: NumbersProps) => {
+const Numbers = memo(({ right }: NumbersProps) => {
   const useble = useSelector((state: RootState) =>
     state.calc.activeBlock.some((item: activeBlockTypes) => item === "numbers")
   );
@@ -26,14 +27,23 @@ const Numbers = ({ right }: NumbersProps) => {
   const mode = useSelector((state: RootState) => state.calc.mode);
 
   return (
-    <Container inside="numbers" useble={useble && !right} right={right} runtime={mode === 'runtime'}>
+    <Container
+      inside="numbers"
+      useble={useble && !right}
+      right={right}
+      runtime={mode === "runtime"}
+    >
       {numbers.map((item: string, i: number) => (
-        <Button key={i} size={item === '0' ? 'large' : 'medium'} variant="white">
+        <Button
+          key={i}
+          size={item === "0" ? "large" : "medium"}
+          variant="white"
+        >
           {item}
         </Button>
       ))}
     </Container>
   );
-};
+});
 
 export default Numbers;
