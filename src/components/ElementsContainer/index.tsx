@@ -14,16 +14,16 @@ const elementList: activeBlockTypes[] = [
 ];
 
 const elements: IElements = {
-  display: <Display right={false}/>,
-  actions: <Operations right={false}/>,
-  numbers: <Numbers right={false}/>,
-  action: <Equals right={false}/>,
+  display: (key) => <Display key={key} right={false} />,
+  actions: (key) => <Operations key={key} right={false} />,
+  numbers: (key) => <Numbers key={key} right={false} />,
+  action: (key) => <Equals key={key} right={false} />,
 };
 
 const ElementsContainer = (): JSX.Element => {
   return (
     <div className={styles.elements}>
-      {elementList.map((item: activeBlockTypes) => elements[item])}
+      {elementList.map((item: activeBlockTypes, i: number) => elements[item](i))}
     </div>
   );
 };

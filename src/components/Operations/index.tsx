@@ -11,8 +11,10 @@ const Operations = ({ right }: OperationsProps): JSX.Element => {
     state.calc.activeBlock.some((item: activeBlockTypes) => item === "actions")
   );
 
+  const mode = useSelector((state: RootState) => state.calc.mode);
+
   return (
-    <Container inside="actions" useble={useble && !right} right={right}>
+    <Container inside="actions" useble={useble && !right} right={right} runtime={mode === 'runtime'}>
       {operations.map((item: string, i: number) => (
         <Button key={i} size="small" variant="white">
           {item}

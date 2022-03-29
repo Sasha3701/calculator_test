@@ -23,10 +23,12 @@ const Numbers = ({ right }: NumbersProps) => {
     state.calc.activeBlock.some((item: activeBlockTypes) => item === "numbers")
   );
 
+  const mode = useSelector((state: RootState) => state.calc.mode);
+
   return (
-    <Container inside="numbers" useble={useble && !right} right={right}>
+    <Container inside="numbers" useble={useble && !right} right={right} runtime={mode === 'runtime'}>
       {numbers.map((item: string, i: number) => (
-        <Button key={i} size="medium" variant="white">
+        <Button key={i} size={item === '0' ? 'large' : 'medium'} variant="white">
           {item}
         </Button>
       ))}

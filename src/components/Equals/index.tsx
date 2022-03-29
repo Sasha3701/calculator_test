@@ -9,8 +9,10 @@ const Equals = ({ right }: EqualsProps): JSX.Element => {
     state.calc.activeBlock.some((item: activeBlockTypes) => item === "action")
   );
 
+  const mode = useSelector((state: RootState) => state.calc.mode);
+
   return (
-    <Container inside="action" useble={useble && !right} right={right}>
+    <Container inside="action" useble={useble && !right} right={right} runtime={mode === 'runtime'}>
       <Button size="large" variant="blue">
         =
       </Button>

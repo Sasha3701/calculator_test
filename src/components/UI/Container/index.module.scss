@@ -10,12 +10,14 @@
     box-sizing: border-box;
     gap: 8px;
     position: relative;
-    cursor: move;
     &_right {
         box-shadow: none;
     }
     &_useble {
         opacity: 0.5;
+    }
+    &_draggable {
+        cursor: move;
     }
     &__block {
         position: absolute;

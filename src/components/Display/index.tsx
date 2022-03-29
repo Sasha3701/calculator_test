@@ -9,8 +9,10 @@ const Display = ({ right }: DisplayProps): JSX.Element => {
     state.calc.activeBlock.some((item: activeBlockTypes) => item === "display")
   );
 
+  const mode = useSelector((state: RootState) => state.calc.mode);
+
   return (
-    <Container inside="display" useble={useble && !right} right={right}>
+    <Container inside="display" useble={useble && !right} right={right} runtime={mode === 'runtime'}>
       <DisplayComponent value={100} />
     </Container>
   );

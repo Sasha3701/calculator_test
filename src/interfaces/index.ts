@@ -1,6 +1,6 @@
 export interface IElements {
-    display: JSX.Element;
-    actions: JSX.Element;
-    numbers: JSX.Element;
-    action: JSX.Element;
+    display: (key: number) => JSX.Element;
+    actions: (key: number) => JSX.Element;
+    numbers: (key: number) => JSX.Element;
+    action: (key: number) => JSX.Element;
   }
