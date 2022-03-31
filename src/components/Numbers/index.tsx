@@ -29,7 +29,7 @@ const Numbers = memo(({ right }: NumbersProps) => {
   const mode = useSelector((state: RootState) => state.calc.mode);
 
   const handlePress = useCallback((value: string) => {
-    dispatch(changeValue(value === "," ? '.' : value));
+    dispatch(changeValue(value));
   }, []);
 
   return (

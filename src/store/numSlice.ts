@@ -17,6 +17,12 @@ export const calcSlice = createSlice({
   initialState,
   reducers: {
     changeValue: (state, action: PayloadAction<string>) => {
+      if (state.value.length > 15) {
+        return
+      }
+      if (state.value.includes(",") &&  action.payload === ",") {
+        return
+      }
       state.value += action.payload;
     },
     pressCalc: (state, action: PayloadAction<string>) => {
@@ -35,23 +41,22 @@ export const calcSlice = createSlice({
         switch (operation) {
           case "+":
             state.value = String(
-              Math.round((parseFloat(result) + parseFloat(value)) * 100) / 100
-            );
+              Math.round((parseFloat(result) + parseFloat(value)) * 10**15) / 10**15
+            ).replace(".", ",");
             break;
           case "-":
             state.value = String(
-              Math.round((parseFloat(result) - parseFloat(value)) * 1000) / 1000
-            );
+              Math.round((parseFloat(result) - parseFloat(value)) * 10**15) / 10**15
+            ).replace(".", ",");
             break;
           case "/":
-            state.value = String(
-              Math.round((parseFloat(result) / parseFloat(value)) * 1000) / 1000
-            );
+            const numResult = Math.round((parseFloat(result) / parseFloat(value)) * 10**15) / 10**15;
+            state.value = numResult === Infinity ? 'Не определено' : String(numResult).replace(".", ",");
             break;
           case "*":
             state.value = String(
-              Math.round(parseFloat(result) * parseFloat(value) * 1000) / 1000
-            );
+              Math.round(parseFloat(result) * parseFloat(value) * 10**15) / 10**15
+            ).replace(".", ",");
             break;
           default:
             break;

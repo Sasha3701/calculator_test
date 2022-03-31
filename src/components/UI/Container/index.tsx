@@ -51,9 +51,12 @@ const Container = memo(
 
     const handleDoubleClick = useCallback(
       (inside: string) => {
+        if (runtime) {
+          return;
+        }
         dispatch(removeBlock(inside as activeBlockTypes));
       },
-      [inside]
+      [inside, runtime]
     );
 
     return (

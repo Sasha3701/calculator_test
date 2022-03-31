@@ -17,7 +17,7 @@ import numSlice from "./numSlice";
 const persistConfigNum = {
   key: "root",
   storage,
-  blacklist: ['value']
+  blacklist: ['value', 'operation', 'result']
 };
 
 const persistedReducerNum = persistReducer(persistConfigNum, numSlice);

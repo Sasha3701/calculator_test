@@ -1,7 +1,6 @@
 @import '../../../styles/variables.module.scss';
 
 .display {
-    font-size: 36px;
     font-weight: 800;
     text-align: right;
     padding: 4px 8px;
@@ -9,5 +8,9 @@
     line-height: 44px;
     background-color: $grey-light;
     border-radius: 6px;
+    font-size: 19px;
     width: 100%;
+    &_null {
+        font-size: 36px;
+    }
 }
