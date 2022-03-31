@@ -11,6 +11,7 @@ const Display = memo(({ right }: DisplayProps): JSX.Element => {
   );
 
   const mode = useSelector((state: RootState) => state.calc.mode);
+  const num = useSelector((state: RootState) => state.num.value);
 
   return (
     <Container
@@ -19,7 +20,7 @@ const Display = memo(({ right }: DisplayProps): JSX.Element => {
       right={right}
       runtime={mode === "runtime"}
     >
-      <DisplayComponent value={100} />
+      <DisplayComponent value={num ? num : "0"} />
     </Container>
   );
 });

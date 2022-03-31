@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import calcSlice from "./calcSlice";
+import numSlice from "./numSlice";
 
 const store = configureStore({
   reducer: {
     calc: calcSlice,
+    num: numSlice
   },
 });
 

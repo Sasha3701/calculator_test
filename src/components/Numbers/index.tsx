@@ -1,7 +1,8 @@
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import { Button, Container } from "../UI";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/store";
+import { changeValue } from "../../store/numSlice";
 import { activeBlockTypes } from "../../types";
 import { NumbersProps } from "./Numbers.props";
 
@@ -20,11 +21,16 @@ const numbers: string[] = [
 ];
 
 const Numbers = memo(({ right }: NumbersProps) => {
+  const dispatch = useDispatch();
   const useble = useSelector((state: RootState) =>
     state.calc.activeBlock.some((item: activeBlockTypes) => item === "numbers")
   );
 
   const mode = useSelector((state: RootState) => state.calc.mode);
+
+  const handlePress = useCallback((value: string) => {
+    dispatch(changeValue(value === "," ? '.' : value));
+  }, []);
 
   return (
     <Container
@@ -38,6 +44,7 @@ const Numbers = memo(({ right }: NumbersProps) => {
           key={i}
           size={item === "0" ? "large" : "medium"}
           variant="white"
+          onClick={() => handlePress(item)}
         >
           {item}
         </Button>
