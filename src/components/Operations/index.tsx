@@ -17,7 +17,7 @@ const Operations = memo(({ right }: OperationsProps): JSX.Element => {
   const mode = useSelector((state: RootState) => state.calc.mode);
 
   const handlePress = useCallback((value: string) => {
-    dispatch(pressCalc(value));
+    dispatch(pressCalc(value === "x" ? "*" : value));
   }, []);
 
   return (

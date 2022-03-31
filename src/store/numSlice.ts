@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { mathFunc } from "../utils";
 
 export interface INum {
   value: string;
@@ -18,14 +19,20 @@ export const calcSlice = createSlice({
   reducers: {
     changeValue: (state, action: PayloadAction<string>) => {
       if (state.value.length > 15) {
-        return
+        return;
       }
-      if (state.value.includes(",") &&  action.payload === ",") {
-        return
+      if (state.value.includes(",") && action.payload === ",") {
+        return;
       }
       state.value += action.payload;
     },
     pressCalc: (state, action: PayloadAction<string>) => {
+      if (state.value && state.result) {
+        const { value, operation, result } = state;
+        state.result = mathFunc(operation, result, value)!
+        state.operation = action.payload;
+        state.value = "";
+      }
       if (state.value) {
         state.operation = action.payload;
         state.result += state.value;
@@ -38,29 +45,9 @@ export const calcSlice = createSlice({
     math: (state) => {
       const { value, operation, result } = state;
       if (value && result) {
-        switch (operation) {
-          case "+":
-            state.value = String(
-              Math.round((parseFloat(result) + parseFloat(value)) * 10**15) / 10**15
-            ).replace(".", ",");
-            break;
-          case "-":
-            state.value = String(
-              Math.round((parseFloat(result) - parseFloat(value)) * 10**15) / 10**15
-            ).replace(".", ",");
-            break;
-          case "/":
-            const numResult = Math.round((parseFloat(result) / parseFloat(value)) * 10**15) / 10**15;
-            state.value = numResult === Infinity ? 'Не определено' : String(numResult).replace(".", ",");
-            break;
-          case "*":
-            state.value = String(
-              Math.round(parseFloat(result) * parseFloat(value) * 10**15) / 10**15
-            ).replace(".", ",");
-            break;
-          default:
-            break;
-        }
+        state.value = mathFunc(operation, result, value)!
+        state.operation = "";
+        state.result = "";
       }
     },
   },
